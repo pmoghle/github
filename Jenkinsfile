@@ -12,6 +12,10 @@ pipeline {
           steps{
             script{
               env.BUCKET_NAME=params.S3_BUCKET_NAME
+              sh "echo 'running the system check commands'"
+              sh "whoami"
+              sh "pwd"
+              sh "aws s3 ls"
               sh "sed -i 's/testbucket001/$BUCKET_NAME/g' s3-bucket.tf"
               sh "cat s3-bucket.tf"
                 }

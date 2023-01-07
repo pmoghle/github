@@ -32,7 +32,7 @@ pipeline {
         stage('Terraform plan'){
           steps{
             script{
-              sh " terraform init"
+              sh " terraform plan"
                 }
             }
         }
@@ -41,7 +41,7 @@ pipeline {
             script{
               sh " ls -lart"
               sh "cat s3-bucket.tf"
-              sh " terraform apply -auto-approve"
+              sh ' terraform apply -auto-approve'
                 }
             }
         }

@@ -39,6 +39,8 @@ pipeline {
         stage('Terraform apply'){
           steps{
             script{
+              sh " ls -lart"
+              sh "cat s3-bucket.tf"
               sh " terraform apply -auto-approve"
                 }
             }

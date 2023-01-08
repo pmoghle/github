@@ -40,7 +40,7 @@ pipeline {
           steps{
             script{
               sh " ls -lart"
-              sh "cat latest.tf"
+              sh "cat s3-bucket.tf"
               sh ' terraform apply -auto-approve'
                 }
             }

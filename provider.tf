@@ -12,6 +12,6 @@ terraform {
 
 #provider for AWS
 provider "aws" {
-    profile="default"
+    shared_credentials_file = ~/.aws/credentials"
     region="ap-south-1" 
 }

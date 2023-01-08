@@ -52,19 +52,35 @@ resource "aws_s3_bucket_policy" "public_read_access" {
 
 #DataSource to generate a policy document
 data "aws_iam_policy_document" "public_read_access" {
-  statement {
-    principals {
-	  type = "*"
-	  identifiers = ["*"]
-	}
-    effect=deny
-    actions = [
-      "s3:GetObject",
-      "s3:ListBucket",
-    ]
-    resources = [
-      aws_s3_bucket.private_s3_bucket.arn,
-      "${aws_s3_bucket.private_s3_bucket.arn}/*",
-    ]
-  }
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Deny",
+      "Principal": "*",
+      "Action": [ "s3:*" ],
+      "Resource": [
+        "${aws_s3_bucket.private_s3_bucket.arn}",
+        "${aws_s3_bucket.private_s3_bucket.arn}/*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Principal": {
+	      "AWS":"arn:aws:iam::943781783687:user/s3bucket"
+      },
+      "Action": [ 
+	      "s3:GetObject",
+	      "s3:GetBucketLocation",
+	      "s3:ListBucket"
+      ],
+      "Resource": [
+        "${aws_s3_bucket.private_s3_bucket.arn}",
+        "${aws_s3_bucket.private_s3_bucket.arn}/*"
+      ]
+    }
+  ]
+}
+EOF
 }

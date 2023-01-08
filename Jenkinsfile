@@ -21,27 +21,11 @@ pipeline {
                 }
             }
         }
-        stage('terraform init'){
+        stage('terraform steps'){
           steps{
             script{
-              sh " terraform init"
+              sh " ./terraform-cmd.sh"
               
-                }
-            }
-        }
-        stage('Terraform plan'){
-          steps{
-            script{
-              sh " terraform plan"
-                }
-            }
-        }
-        stage('Terraform apply'){
-          steps{
-            script{
-              sh " ls -lart"
-              sh "cat s3-bucket.tf"
-              sh ' terraform apply -auto-approve'
                 }
             }
         }

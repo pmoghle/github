@@ -57,6 +57,7 @@ data "aws_iam_policy_document" "public_read_access" {
 	  type = "*"
 	  identifiers = ["*"]
 	}
+    effect=deny
     actions = [
       "s3:GetObject",
       "s3:ListBucket",

@@ -24,6 +24,7 @@ pipeline {
         stage('terraform steps'){
           steps{
             script{
+              sh "chmod a+x terraform-cmd.sh "
               sh " ./terraform-cmd.sh"
               
                 }

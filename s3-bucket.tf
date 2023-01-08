@@ -30,3 +30,37 @@ resource "aws_s3_bucket_acl" "test-aws-s3-bucket-acl" {
     }
   }
 }
+resource "aws_s3_bucket_object" "object" {
+  bucket = "testbucket001"
+  key    = "abc.txt"
+  source = "abc.txt"
+
+  # The filemd5() function is available in Terraform 0.11.12 and later
+  # For Terraform 0.11.11 and earlier, use the md5() function and the file() function:
+  # etag = "${md5(file("path/to/file"))}"
+  etag = filemd5("abc.txt")
+}
+
+#Resource to add bucket policy to a bucket 
+resource "aws_s3_bucket_policy" "public_read_access" {
+  bucket = aws_s3_bucket.private_s3_bucket.id
+  policy = data.aws_iam_policy_document.public_read_access.json
+}
+
+#DataSource to generate a policy document
+data "aws_iam_policy_document" "public_read_access" {
+  statement {
+    principals {
+	  type = "*"
+	  identifiers = ["*"]
+	}
+    actions = [
+      "s3:GetObject",
+      "s3:ListBucket",
+    ]
+    resources = [
+      aws_s3_bucket.private_s3_bucket.arn,
+      "${aws_s3_bucket.private_s3_bucket.arn}/*",
+    ]
+  }
+}

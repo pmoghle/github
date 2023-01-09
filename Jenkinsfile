@@ -21,12 +21,26 @@ pipeline {
                 }
             }
         }
-        stage('terraform steps'){
+        stage('terraform init'){
           steps{
             script{
-              sh "chmod a+x terraform-cmd.sh "
-              sh " ./terraform-cmd.sh"
-              
+              sh "terraform init "
+
+                }
+            }
+        }
+        stage('terraform plan'){
+          steps{
+            script{
+              sh " terraform plan"
+                }
+            }
+        }
+        stage('terraform apply '){
+          steps{
+            script{
+              sh " terraform apply -auto-approve"
+              sh "aws s3 ls $BUCKET_NAME"
                 }
             }
         }

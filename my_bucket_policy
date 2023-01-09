@@ -5,7 +5,7 @@
           "Sid": "statement1",
           "Effect": "Allow",
           "Principal": {
-             "AWS": "arn:aws:iam::821359796262:user/${params.IAM_USER}"
+             "AWS": "arn:aws:iam::943781783687:user/${params.IAM_USER}"
           },
           "Action": [
              "s3:GetBucketLocation",
@@ -19,7 +19,7 @@
           "Sid": "statement2",
           "Effect": "Allow",
           "Principal": {
-             "AWS": "arn:aws:iam::821359796262:user/${params.IAM_USER}"
+             "AWS": "arn:aws:iam::943781783687:user/${params.IAM_USER}"
           },
           "Action": [
               "s3:GetObject"

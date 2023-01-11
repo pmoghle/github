@@ -2,14 +2,16 @@
     "Version": "2012-10-17",
     "Statement": [
        {
-          "Sid": "statement1",
+          "Sid": "Allow Specific User To AccessBucket",
           "Effect": "Allow",
           "Principal": {
              "AWS": "arn:aws:iam::943781783687:user/${params.IAM_USER}"
           },
           "Action": [
              "s3:GetBucketLocation",
-             "s3:ListBucket"
+             "s3:ListBucket",
+             "s3:PutObject",
+             "s3:DeleteObject"
           ],
           "Resource": [
              "arn:aws:s3:::${params.BUCKET_NAME}/${params.IAM_USER}"
